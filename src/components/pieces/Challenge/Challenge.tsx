@@ -7,11 +7,11 @@ export interface IChallenge {
   completed: boolean;
 }
 
-const handleStreakDotClick = (event: any) => {
-  console.log('event :>> ', event);
+const handleStreakDotClick = (checked: boolean) => {
+  console.log('event :>> ', checked);
 }
 
-const BlankDot: FC<IChallenge> = ({ challenge, completed }: IChallenge): JSX.Element => {
+const Challenge: FC<IChallenge> = ({ challenge, completed }: IChallenge): JSX.Element => {
   return (
     <StyledChallengeContainer>
       <StreakDot callback={handleStreakDotClick} checked={completed}/>
@@ -19,4 +19,4 @@ const BlankDot: FC<IChallenge> = ({ challenge, completed }: IChallenge): JSX.Ele
     </StyledChallengeContainer>
   )
 };
-export default BlankDot;
+export default Challenge;

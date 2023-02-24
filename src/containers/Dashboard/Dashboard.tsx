@@ -3,27 +3,47 @@ import contrast from 'get-contrast';
 import randomColor from 'random-hex-color';
 import { StyledDashboard } from './styles';
 import DailyStreak from '../../components/views/DailyStreak/DailyStreak';
+import ThemeColorsProvider, { IThemeColors } from '../../context/ThemeColorsProvider';
+import DailyWorkItems from '../../components/views/DailyWorkItems/DailyWorkItems';
 
-export interface IDashboard {
-}
+export interface IDashboard {}
+
 export const getColorPair = () => {
-  const colorA = randomColor()
-  let colorB = randomColor()
+  const colorA = randomColor();
+  let colorB = randomColor();
 
   while (!contrast.isAccessible(colorA, colorB)) {
-    colorB = randomColor()
+    colorB = randomColor();
   }
 
-  return [colorA, colorB]
-}
+  return {
+    primary: colorA,
+    secondary: colorB,
+  };
+};
 
-export const themeColors = getColorPair();
+const themeColors: IThemeColors = getColorPair();
+
+const items = [
+  {
+    content: 'test1'
+  },
+  {
+    content: 'test2'
+  },
+  {
+    content: 'test3'
+  }
+]
 
 const Dashboard: FC<IDashboard> = (): JSX.Element => {
   return (
-    <StyledDashboard $theme={themeColors}>
-      <DailyStreak themeColors={themeColors}/>
-    </StyledDashboard>
+    <ThemeColorsProvider value={themeColors}>
+      <StyledDashboard $theme={themeColors}>
+        <DailyStreak themeColors={themeColors} />
+        <DailyWorkItems items={items}></DailyWorkItems>
+      </StyledDashboard>
+    </ThemeColorsProvider>
   );
-}
+};
 export default Dashboard;

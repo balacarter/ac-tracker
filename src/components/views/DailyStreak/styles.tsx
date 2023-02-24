@@ -1,5 +1,14 @@
 import styled from 'styled-components';
 
+export const StyledDailyStreakContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  column-gap: 1rem;
+  padding: 1rem;;
+  border-style: solid;
+  border-width: 1px;
+`
+
 export const StyledDailyStreak = styled.div`
   display: flex;
   align-items: center;
@@ -8,6 +17,7 @@ export const StyledDailyStreak = styled.div`
   padding: 0.8rem 2rem 1rem 2rem;
   border-style: solid;
   border-width: 1px;
+  height: fit-content;
 `
 export const StyledStreakDotContainer = styled.div<{ $checked: boolean }>`
   display: flex;

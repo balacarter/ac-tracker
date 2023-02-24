@@ -1,15 +1,25 @@
 import styled from 'styled-components';
+import { IThemeColors } from '../../context/ThemeColorsProvider';
 
-export const StyledDashboard = styled.div<{ $theme: any }>`
+export const StyledDashboard = styled.div<{ $theme: IThemeColors }>`
   &,* {
-    border-color: ${({$theme}) => $theme[1]};
-    color: ${({$theme}) => $theme[1]};
-    background-color: ${({$theme}) => $theme[0]};
+    border-color: ${({$theme}) => $theme.secondary};
+    color: ${({$theme}) => $theme.secondary};
+    background-color: ${({$theme}) => $theme.primary};
   }
   height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 0.5rem;
+  padding: 2rem;
+`;
+
+export const StyledIcon = styled.img`
+  width: 1rem;
+  height: 1rem;
+  &:hover {
+    cursor: pointer;
+  }
 `;
