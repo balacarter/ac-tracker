@@ -2,6 +2,7 @@ import { FC, useEffect, useRef, useState } from 'react';
 import StreakDot from '../../pieces/StreakDot/StreakDot';
 import {
   addDailyChallenge,
+  deleteDailyChallnge,
   IDailyChallenge,
   updateChallengeCompleted,
 } from '../../../Firebase';
@@ -21,6 +22,7 @@ import {
   useThemeColorsContext,
 } from '../../../context/ThemeColorsProvider';
 import { StyledIcon } from '../../../containers/Dashboard/styles';
+import { StyledThemeIcon } from '../../pieces/StyledThemeIcon';
 
 export interface IChallengesProps {
   dailyChallenges: IDailyChallenge[];
@@ -47,6 +49,11 @@ const Challenges: FC<IChallengesProps> = ({ dailyChallenges }): JSX.Element => {
       setHideInput(!hideInput);
     }
   };
+
+  const deleteChallenge = (index: number) => {
+    deleteDailyChallnge(index);
+  };
+
   const handleStreakDotClick = (completed: boolean, id: number) => {
     console.log('completed :>> ', completed);
     console.log('id :>> ', id);
@@ -58,7 +65,7 @@ const Challenges: FC<IChallengesProps> = ({ dailyChallenges }): JSX.Element => {
     return (
       <StyledChallengesList>
         {challenges.map((challenge: IDailyChallenge) => (
-          <StyledChallengePairContainer>
+          <StyledChallengePairContainer key={challenge.id}>
             <StyledChallengeDotPair key={challenge.id}>
               <StreakDot
                 checked={challenge.completed}
@@ -68,7 +75,11 @@ const Challenges: FC<IChallengesProps> = ({ dailyChallenges }): JSX.Element => {
               />
               <li>{challenge.challenge}</li>
             </StyledChallengeDotPair>
-            <StyledIcon src={IconDelete} />
+            <StyledThemeIcon
+              $icon={'x'}
+              $right={0}
+              onClick={() => deleteChallenge(challenge.id)}
+            />
           </StyledChallengePairContainer>
         ))}
       </StyledChallengesList>
@@ -79,8 +90,8 @@ const Challenges: FC<IChallengesProps> = ({ dailyChallenges }): JSX.Element => {
     <StyledChallengesContainer $themeColors={themeColors}>
       <ChallengeList />
       <StyledAddChallengeContainer>
-        <StyledIcon
-          src={hideInput ? IconAdd : IconConfirm}
+        <StyledThemeIcon
+          $icon={hideInput ? '+' : '✓'}
           className={hideInput ? 'show' : 'add'}
           onClick={createChallenge}
         />

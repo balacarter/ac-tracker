@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { StyledIcon } from '../../../containers/Dashboard/styles';
 import { IThemeColors } from '../../../context/ThemeColorsProvider';
+import { StyledThemeIcon } from '../../pieces/StyledThemeIcon';
 
 export const StyledChallengesContainer = styled.div<{
   $themeColors: IThemeColors;
@@ -21,10 +22,13 @@ export const StyledChallengesList = styled.ol`
 
 export const StyledChallengePairContainer = styled.div`
   display: flex;
-  img {
+  position: relative;
+  ${StyledThemeIcon} {
+    position: absolute;
+    right: 0;
     display: none;
   }
-  &:hover img{
+  &:hover ${StyledThemeIcon} {
     display: block;
   }
 `
@@ -38,6 +42,10 @@ export const StyledChallengeDotPair = styled.div`
   padding: 0 0.5rem 0.5rem 0;
   border-bottom: 1px solid;
   width: 100%;
+
+  li {
+    margin-right: 1rem;
+  }
 `;
 
 export const StyledAddChallengeContainer = styled.div`
@@ -45,6 +53,11 @@ export const StyledAddChallengeContainer = styled.div`
   flex-direction: row;
   ${StyledIcon} {
     margin-top: 0.5rem;
+  }
+
+  .show {
+    font-size: 1.5rem;
+    height: auto;
   }
 `;
 

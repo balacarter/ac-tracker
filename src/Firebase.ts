@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from 'firebase/app';
-import { getDatabase, set, ref, get, child, onValue, update } from 'firebase/database';
+import { getDatabase, set, ref, get, child, onValue, update, remove } from 'firebase/database';
 
 export interface IDailyCompletedPayload {
   completed: boolean;
@@ -60,6 +60,27 @@ export const onDailyStreakCount = (callback: any) => {
   })
 }
 
+export const updateDailyWorkItems = (count: number) => {
+  set(ref(database, 'daily/items'), {
+    count,
+  });
+};
+
+export const getDailyWorkItems = () => {
+  const dbRef = ref(getDatabase());
+  return (get(child(dbRef, 'daily/items')).then((snapshot) => {
+    return snapshot.val();
+  }));
+};
+
+export const onDailyWorkItems = (callback: any) => {
+  const dbRef = ref(database, 'daily/items');
+  onValue(dbRef, (snapshot) => {
+    const data = snapshot.val().count;
+    callback(data);
+  })
+}
+
 export const updateDailyStreakCount = (count: number) => {
   set(ref(database, 'daily/count'), {
     count,
@@ -81,6 +102,10 @@ export const addDailyChallenge = (num: number, challenge: string) => {
     challenge,
     completed: false,
   })
+}
+
+export const deleteDailyChallnge = (id: number) => {
+  remove(ref(database, `daily/challenges/${id}/`));
 }
 
 export interface IChallengeCompletedUpdate {

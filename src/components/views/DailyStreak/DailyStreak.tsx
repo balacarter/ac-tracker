@@ -28,9 +28,10 @@ const DailyStreak: FC<IDailyStreak> = (themeColors): JSX.Element => {
     if (val !== streakCount) setStreakCount(val);
   });
   onDailyChallenge((newChallenges: IDailyChallenge[]) => {
+    console.log('newChallenges :>> ', newChallenges);
     if (newChallenges && newChallenges?.length !== challenges.length) {
       setChallenges(newChallenges);
-    }
+    } else if (newChallenges === null && challenges.length > 0) setChallenges([]);
   });
 
   const handleStreakDotClick = (completed: boolean) => {
