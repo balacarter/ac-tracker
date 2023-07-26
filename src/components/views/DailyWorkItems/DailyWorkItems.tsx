@@ -4,37 +4,45 @@ import { StyledDailyWorkItems, StyledDailyWorkItemsContainer } from './styles';
 import {
   onDailyWorkItems,
   addDailyWorkItem,
+  updateWorkItemCompleted,
+  deleteDailyWorkItem,
 } from '../../../Firebase';
 import InputField from '../../pieces/InputField/InputField';
+import ItemList from '../../pieces/ItemList/ItemList';
 
 export interface IDailyWorkitems {
   items: IWorkItem[];
 }
 
 const DailyWorkItems = (): JSX.Element => {
-  const [items, setItems] = useState<IWorkItem[]>();
+  const [items, setItems] = useState<IWorkItem[]>([]);
 
   onDailyWorkItems((newItems: IWorkItem[]) => {
-    if (!items  || newItems.length !== items.length)
+    if (newItems && newItems.length !== items.length) {
+      console.log('here :>> ');
       setItems(newItems);
+    }
+    else if (!newItems && items.length > 0) setItems([]);
   });
 
   const mapItems = () => {
-    if (items)
-      return items.map((item) => {
-        return <li>{item.item}</li>;
-      });
-    else return <></>;
+    return items.map((item: IWorkItem) => {
+      return {
+        id: item.id,
+        item: item.item,
+        completed: item.completed ?? true,
+      }
+    })
   };
 
   const handleInput = (input: string) => {
     console.log('e :>> ', input);
-    if (items) addDailyWorkItem(items.length, input);
+    addDailyWorkItem(items.length, input);
   };
   return (
     <StyledDailyWorkItemsContainer>
       <h2>Daily Work Items</h2>
-      <StyledDailyWorkItems>{mapItems()}</StyledDailyWorkItems>
+      {items && <ItemList items={mapItems()} updateItem={updateWorkItemCompleted} deleteItem={deleteDailyWorkItem}/>}
       <InputField callback={handleInput} />
     </StyledDailyWorkItemsContainer>
   );

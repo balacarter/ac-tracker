@@ -28,21 +28,11 @@ const Challenges: FC<IChallengesProps> = ({ dailyChallenges }): JSX.Element => {
     addDailyChallenge(challenges.length, input);
   };
 
-  const deleteChallenge = (index: number) => {
-    deleteDailyChallnge(index);
-  };
-
-  const handleStreakDotClick = (completed: boolean, id: number) => {
-    console.log('completed :>> ', completed);
-    console.log('id :>> ', id);
-    updateChallengeCompleted(completed, id);
-  };
-
   const mapChallenges = () => {
     return challenges.map((challenge: IDailyChallenge) => {
       return {
         id: challenge.id,
-        content: challenge.challenge,
+        item: challenge.challenge,
         completed: challenge.completed,
       }
     })
@@ -50,7 +40,7 @@ const Challenges: FC<IChallengesProps> = ({ dailyChallenges }): JSX.Element => {
 
   return (
     <StyledChallengesContainer>
-      <ItemList items={mapChallenges()} updateItem={handleStreakDotClick} deleteItem={deleteChallenge} />
+      <ItemList items={mapChallenges()} updateItem={updateChallengeCompleted} deleteItem={deleteDailyChallnge} />
       <StyledAddChallengeContainer>
         <InputField callback={createChallenge}/>
       </StyledAddChallengeContainer>

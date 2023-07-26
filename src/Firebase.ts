@@ -74,6 +74,16 @@ export const getDailyWorkItems = () => {
   }));
 };
 
+export const deleteDailyWorkItem = (id: number) => {
+  remove(ref(database, `daily/items/${id}/`));
+}
+
+export const updateWorkItemCompleted = (newCompleted: boolean, id: number) => {
+  update(ref(database, `daily/items/${id}/`), {
+    completed: newCompleted,
+  });
+}
+
 export const onDailyWorkItems = (callback: any) => {
   const dbRef = ref(database, '/daily/items');
   onValue(dbRef, (snapshot) => {

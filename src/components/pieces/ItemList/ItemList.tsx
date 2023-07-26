@@ -4,7 +4,7 @@ import { StyledItemList, StyledListItemDotPair, StyledListItemPairContainer } fr
 
 interface IItem {
   id: number;
-  content: string;
+  item: string;
   completed: boolean;
 }
 
@@ -26,7 +26,7 @@ const ItemList = ({ items, updateItem, deleteItem }: IItemList) => {
               active={true}
               id={item.id}
             />
-            <li>{item.content}</li>
+            <li>{item.item}</li>
           </StyledListItemDotPair>
           <StyledThemeIcon
             $icon={'x'}
