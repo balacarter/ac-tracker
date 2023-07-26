@@ -6,7 +6,7 @@ interface IFieldInput {
   callback: (input: string) => void;
 }
 
-const FieldInput = ({ callback }: IFieldInput) => {
+const InputField = ({ callback }: IFieldInput) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [hideInput, setHideInput] = useState(true);
 
@@ -15,6 +15,7 @@ const FieldInput = ({ callback }: IFieldInput) => {
       setHideInput(!hideInput);
     } else if (inputRef.current) {
       const input = inputRef.current.value;
+      console.log('input :>> ', input);
       callback(input);
       inputRef.current.value = '';
       setHideInput(!hideInput);
@@ -33,4 +34,4 @@ const FieldInput = ({ callback }: IFieldInput) => {
   )
 }
 
-export default FieldInput;
+export default InputField;

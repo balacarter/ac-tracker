@@ -13,7 +13,6 @@ export interface IStreakDot {
 
 const StreakDot: FC<IStreakDot> = ({checked, callback, id, active = false, daily = false}:IStreakDot):JSX.Element => {
   const [isChecked, setIsChecked] = useState(checked);
-  const themeColors = useThemeColorsContext() as IThemeColors;
 
   const handleClick = (event: any) => {
     setIsChecked(!isChecked);
@@ -22,7 +21,7 @@ const StreakDot: FC<IStreakDot> = ({checked, callback, id, active = false, daily
   }
 
   return (
-    <StyledStreakBox $themeColors={themeColors} onClick={(event) => {
+    <StyledStreakBox onClick={(event) => {
       if(active) {
         handleClick(event)
       }

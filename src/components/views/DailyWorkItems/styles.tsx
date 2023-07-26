@@ -1,10 +1,8 @@
 import styled, { css } from 'styled-components';
-import { IThemeColors } from '../../../context/ThemeColorsProvider';
+import { StyledContainer } from '../../pieces/styles';
 
-export const StyledDailyWorkItemsContainer = styled.div`
-  display: flex;
+export const StyledDailyWorkItemsContainer = styled(StyledContainer)`
   flex-direction: column;
-  border: 1px solid;
 `
 
 export const StyledDailyWorkItems = styled.ul`

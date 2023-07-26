@@ -1,10 +1,8 @@
 import styled, { css } from 'styled-components';
-import { IThemeColors } from '../../../context/ThemeColorsProvider';
 
 export const StyledStreakBox = styled.button<{
   $active: boolean;
   $checked: boolean;
-  $themeColors: IThemeColors;
   $daily: boolean
 }>`
   border-width: 2px;
@@ -12,10 +10,10 @@ export const StyledStreakBox = styled.button<{
   border-radius: 25px;
   width: 1rem;
   height: 1rem;
-  ${({ $checked, $themeColors }) =>
+  ${({ $checked }) =>
     $checked &&
     css`
-      background-color: ${$themeColors.secondary};
+      background-color: ${props => props.theme.secondary};
     `}
   ${({ $active }) =>
     $active &&

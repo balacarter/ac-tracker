@@ -3,8 +3,9 @@ import contrast from 'get-contrast';
 import randomColor from 'random-hex-color';
 import { StyledDashboard } from './styles';
 import DailyStreak from '../../components/views/DailyStreak/DailyStreak';
-import ThemeColorsProvider, { IThemeColors } from '../../context/ThemeColorsProvider';
+import { IThemeColors } from '../../context/ThemeColorsProvider';
 import DailyWorkItems from '../../components/views/DailyWorkItems/DailyWorkItems';
+import { ThemeProvider } from 'styled-components';
 
 export interface IDashboard {}
 
@@ -38,12 +39,12 @@ const items = [
 
 const Dashboard: FC<IDashboard> = (): JSX.Element => {
   return (
-    <ThemeColorsProvider value={themeColors}>
+    <ThemeProvider theme={themeColors}>
       <StyledDashboard $theme={themeColors}>
         <DailyStreak themeColors={themeColors} />
         <DailyWorkItems></DailyWorkItems>
       </StyledDashboard>
-    </ThemeColorsProvider>
+    </ThemeProvider>
   );
 };
 export default Dashboard;

@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { IWorkItem } from '../../pieces/WorkItem/WorkItem';
-import { StyledDailyWorkItems } from './styles';
+import { StyledDailyWorkItems, StyledDailyWorkItemsContainer } from './styles';
 import {
   onDailyWorkItems,
   addDailyWorkItem,
-  getDailyWorkItems,
 } from '../../../Firebase';
 import InputField from '../../pieces/InputField/InputField';
 
@@ -33,11 +32,11 @@ const DailyWorkItems = (): JSX.Element => {
     if (items) addDailyWorkItem(items.length, input);
   };
   return (
-    <StyledDailyWorkItems>
+    <StyledDailyWorkItemsContainer>
       <h2>Daily Work Items</h2>
       <StyledDailyWorkItems>{mapItems()}</StyledDailyWorkItems>
       <InputField callback={handleInput} />
-    </StyledDailyWorkItems>
+    </StyledDailyWorkItemsContainer>
   );
 };
 export default DailyWorkItems;

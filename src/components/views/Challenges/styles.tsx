@@ -1,11 +1,8 @@
 import styled from 'styled-components';
 import { StyledIcon } from '../../../containers/Dashboard/styles';
-import { IThemeColors } from '../../../context/ThemeColorsProvider';
 import { StyledThemeIcon } from '../../pieces/StyledThemeIcon';
 
-export const StyledChallengesContainer = styled.div<{
-  $themeColors: IThemeColors;
-}>`
+export const StyledChallengesContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;

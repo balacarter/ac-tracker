@@ -1,5 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
-import StreakDot from '../../pieces/StreakDot/StreakDot';
+import { FC, useEffect, useState } from 'react';
 import {
   addDailyChallenge,
   deleteDailyChallnge,
@@ -8,21 +7,10 @@ import {
 } from '../../../Firebase';
 import {
   StyledAddChallengeContainer,
-  StyledAddChallengeInput,
-  StyledChallengeDotPair,
   StyledChallengesContainer,
-  StyledChallengesList,
-  StyledChallengePairContainer,
 } from './styles';
-import IconAdd from '../../../media/icons/plus.png';
-import IconConfirm from '../../../media/icons/checked.png';
-import IconDelete from '../../../media/icons/delete.png';
-import {
-  IThemeColors,
-  useThemeColorsContext,
-} from '../../../context/ThemeColorsProvider';
-import { StyledIcon } from '../../../containers/Dashboard/styles';
-import { StyledThemeIcon } from '../../pieces/StyledThemeIcon';
+import InputField from '../../pieces/InputField/InputField';
+import ItemList from '../../pieces/ItemList/ItemList';
 
 export interface IChallengesProps {
   dailyChallenges: IDailyChallenge[];
@@ -31,23 +19,13 @@ export interface IChallengesProps {
 const Challenges: FC<IChallengesProps> = ({ dailyChallenges }): JSX.Element => {
   const [challenges, setChallenges] =
     useState<IDailyChallenge[]>(dailyChallenges);
-  const [hideInput, setHideInput] = useState(true);
-  const inputEl = useRef<HTMLInputElement>(null);
-  const themeColors = useThemeColorsContext() as IThemeColors;
 
   useEffect(() => {
     setChallenges(dailyChallenges);
   }, [dailyChallenges]);
 
-  const createChallenge = (event: any) => {
-    if (hideInput) {
-      setHideInput(!hideInput);
-    } else if (inputEl.current) {
-      const challenge = inputEl.current.value;
-      addDailyChallenge(challenges.length, challenge);
-      inputEl.current.value = '';
-      setHideInput(!hideInput);
-    }
+  const createChallenge = (input: string) => {
+    addDailyChallenge(challenges.length, input);
   };
 
   const deleteChallenge = (index: number) => {
@@ -60,42 +38,21 @@ const Challenges: FC<IChallengesProps> = ({ dailyChallenges }): JSX.Element => {
     updateChallengeCompleted(completed, id);
   };
 
-  const ChallengeList = () => {
-    console.log('challenges :>> ', challenges);
-    return (
-      <StyledChallengesList>
-        {challenges.map((challenge: IDailyChallenge) => (
-          <StyledChallengePairContainer key={challenge.id}>
-            <StyledChallengeDotPair key={challenge.id}>
-              <StreakDot
-                checked={challenge.completed}
-                callback={handleStreakDotClick}
-                active={true}
-                id={challenge.id}
-              />
-              <li>{challenge.challenge}</li>
-            </StyledChallengeDotPair>
-            <StyledThemeIcon
-              $icon={'x'}
-              $right={0}
-              onClick={() => deleteChallenge(challenge.id)}
-            />
-          </StyledChallengePairContainer>
-        ))}
-      </StyledChallengesList>
-    );
-  };
+  const mapChallenges = () => {
+    return challenges.map((challenge: IDailyChallenge) => {
+      return {
+        id: challenge.id,
+        content: challenge.challenge,
+        completed: challenge.completed,
+      }
+    })
+  }
 
   return (
-    <StyledChallengesContainer $themeColors={themeColors}>
-      <ChallengeList />
+    <StyledChallengesContainer>
+      <ItemList items={mapChallenges()} updateItem={handleStreakDotClick} deleteItem={deleteChallenge} />
       <StyledAddChallengeContainer>
-        <StyledThemeIcon
-          $icon={hideInput ? '+' : '✓'}
-          className={hideInput ? 'show' : 'add'}
-          onClick={createChallenge}
-        />
-        {!hideInput && <StyledAddChallengeInput ref={inputEl} />}
+        <InputField callback={createChallenge}/>
       </StyledAddChallengeContainer>
     </StyledChallengesContainer>
   );
