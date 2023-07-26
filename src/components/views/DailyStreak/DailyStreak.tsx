@@ -10,10 +10,8 @@ import {
 } from './styles';
 import {
   IDailyChallenge,
-  onDailyChallenge,
-  onDailyStreakCount,
-  updateDailyChallenge,
-  updateDailyStreakCount,
+  dbSubscribe,
+  dbUpdate,
 } from '../../../Firebase';
 import Challenges from '../Challenges/Challenges';
 
@@ -24,20 +22,23 @@ export interface IDailyStreak {
 const DailyStreak: FC<IDailyStreak> = (themeColors): JSX.Element => {
   const [streakCount, setStreakCount] = useState(0);
   const [challenges, setChallenges] = useState<IDailyChallenge[]>([]);
-  onDailyStreakCount((val: any) => {
-    if (val !== streakCount) setStreakCount(val);
+
+  dbSubscribe('daily/count', (data: any) => {
+    const count = data;
+    if (count !== streakCount) setStreakCount(count);
   });
-  onDailyChallenge((newChallenges: IDailyChallenge[]) => {
-    console.log('newChallenges :>> ', newChallenges);
+
+  dbSubscribe('daily/challenges', (newChallenges: IDailyChallenge[]) => {
     if (newChallenges && newChallenges?.length !== challenges.length) {
       setChallenges(newChallenges);
-    } else if (newChallenges === null && challenges.length > 0) setChallenges([]);
+    } else if (newChallenges === null && challenges.length > 0)
+      setChallenges([]);
   });
 
   const handleStreakDotClick = (completed: boolean) => {
-    updateDailyChallenge(completed);
-    if (completed) updateDailyStreakCount(streakCount + 1);
-    else updateDailyStreakCount(streakCount - 1);
+    dbUpdate('daily/completed', completed);
+    if (completed) dbUpdate('daily/count', streakCount + 1);
+    else dbUpdate('daily/count', streakCount - 1);
   };
   return (
     <StyledDailyStreakContainer>
@@ -59,9 +60,7 @@ const DailyStreak: FC<IDailyStreak> = (themeColors): JSX.Element => {
         </StyledStreakDotContainer>
         <StyledTodaySpan>today</StyledTodaySpan>
       </StyledDailyStreak>
-      {challenges && (
-        <Challenges dailyChallenges={challenges}/>
-      )}
+      {challenges && <Challenges dailyChallenges={challenges} />}
     </StyledDailyStreakContainer>
   );
 };

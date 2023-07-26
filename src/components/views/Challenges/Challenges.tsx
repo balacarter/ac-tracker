@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 import {
-  addDailyChallenge,
-  deleteDailyChallnge,
+  dbAdd,
+  dbRemove,
+  dbUpdate,
   IDailyChallenge,
-  updateChallengeCompleted,
 } from '../../../Firebase';
 import {
   StyledAddChallengeContainer,
@@ -25,7 +25,21 @@ const Challenges: FC<IChallengesProps> = ({ dailyChallenges }): JSX.Element => {
   }, [dailyChallenges]);
 
   const createChallenge = (input: string) => {
-    addDailyChallenge(challenges.length, input);
+    const id = challenges.length;
+    const payload = {
+      id,
+      challenge: input,
+      completed: false,
+    };
+    dbAdd(`daily/challenges/${id}`, payload);
+  };
+
+  const updateChallenge = (completed: boolean, id: number) => {
+    dbUpdate(`daily/challenges/${id}`, { ...challenges[id], completed });
+  };
+
+  const deleteChallenge = (id: number) => {
+    dbRemove(`daily/challenges/${id}`);
   };
 
   const mapChallenges = () => {
@@ -34,15 +48,19 @@ const Challenges: FC<IChallengesProps> = ({ dailyChallenges }): JSX.Element => {
         id: challenge.id,
         item: challenge.challenge,
         completed: challenge.completed,
-      }
-    })
-  }
+      };
+    });
+  };
 
   return (
     <StyledChallengesContainer>
-      <ItemList items={mapChallenges()} updateItem={updateChallengeCompleted} deleteItem={deleteDailyChallnge} />
+      <ItemList
+        items={mapChallenges()}
+        updateItem={updateChallenge}
+        deleteItem={deleteChallenge}
+      />
       <StyledAddChallengeContainer>
-        <InputField callback={createChallenge}/>
+        <InputField callback={createChallenge} />
       </StyledAddChallengeContainer>
     </StyledChallengesContainer>
   );

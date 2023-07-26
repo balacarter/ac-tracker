@@ -1,4 +1,4 @@
-import { ChangeEvent, Ref, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { StyledInput, StyledInputContainer } from './styles';
 import { StyledThemeIcon } from '../StyledThemeIcon';
 

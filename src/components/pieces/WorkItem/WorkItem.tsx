@@ -4,7 +4,7 @@ import { StyledWorkItem } from './styles';
 export interface IWorkItem {
   id: number;
   item: string;
-  completed?: boolean;
+  completed: boolean;
 }
 
 const WorkItem: FC<IWorkItem> = ({ item }: IWorkItem): JSX.Element => {
