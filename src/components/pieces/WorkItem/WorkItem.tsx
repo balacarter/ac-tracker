@@ -3,11 +3,12 @@ import { IThemeColors, useThemeColorsContext } from '../../../context/ThemeColor
 import { StyledWorkItem } from './styles';
 
 export interface IWorkItem {
-  content: string;
+  id: number;
+  item: string;
 }
 
-const WorkItem: FC<IWorkItem> = ({ content }: IWorkItem): JSX.Element => {
+const WorkItem: FC<IWorkItem> = ({ item }: IWorkItem): JSX.Element => {
   const themeColors = useThemeColorsContext() as IThemeColors;
-  return <StyledWorkItem>{content}</StyledWorkItem>;
+  return <StyledWorkItem>{item}</StyledWorkItem>;
 };
 export default WorkItem;

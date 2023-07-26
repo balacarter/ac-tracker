@@ -39,7 +39,7 @@ const firebaseConfig = {
   appId: '1:136966603171:web:e98f1b9e01bb9fdc1e5a16',
 };
 
-export const updateDailyChallenge = (completed: IDailyCompletedPayload) => {
+export const updateDailyChallenge = (completed: boolean) => {
   set(ref(database, 'daily/completed'), {
     completed,
   });
@@ -60,9 +60,10 @@ export const onDailyStreakCount = (callback: any) => {
   })
 }
 
-export const updateDailyWorkItems = (count: number) => {
-  set(ref(database, 'daily/items'), {
-    count,
+export const addDailyWorkItem = (num: number, item: string) => {
+  set(ref(database, `daily/items/${num}`), {
+    id: num,
+    item,
   });
 };
 
@@ -74,9 +75,10 @@ export const getDailyWorkItems = () => {
 };
 
 export const onDailyWorkItems = (callback: any) => {
-  const dbRef = ref(database, 'daily/items');
+  const dbRef = ref(database, '/daily/items');
   onValue(dbRef, (snapshot) => {
-    const data = snapshot.val().count;
+    const data = snapshot.val();
+    console.log('daily work items :>> ', data);
     callback(data);
   })
 }
@@ -91,6 +93,7 @@ export const onDailyChallenge = (callback: any) => {
   const dbRef = ref(database, 'daily/challenges');
   onValue(dbRef, (snapshot) => {
     const data = snapshot.val();
+    console.log('data :>> ', data);
     callback(data);
   })
 }

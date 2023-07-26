@@ -23,6 +23,7 @@ export const StyledChallengesList = styled.ol`
 export const StyledChallengePairContainer = styled.div`
   display: flex;
   position: relative;
+  max-width: 300px;
   ${StyledThemeIcon} {
     position: absolute;
     right: 0;

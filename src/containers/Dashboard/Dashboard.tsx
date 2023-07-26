@@ -41,7 +41,7 @@ const Dashboard: FC<IDashboard> = (): JSX.Element => {
     <ThemeColorsProvider value={themeColors}>
       <StyledDashboard $theme={themeColors}>
         <DailyStreak themeColors={themeColors} />
-        <DailyWorkItems items={items}></DailyWorkItems>
+        <DailyWorkItems></DailyWorkItems>
       </StyledDashboard>
     </ThemeColorsProvider>
   );

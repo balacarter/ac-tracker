@@ -11,7 +11,7 @@ export const StyledDashboard = styled.div<{ $theme: IThemeColors }>`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: space-around;
   gap: 0.5rem;
   padding: 2rem;
 `;

@@ -1,34 +1,43 @@
-import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IWorkItem } from '../../pieces/WorkItem/WorkItem';
 import { StyledDailyWorkItems } from './styles';
-import FieldInput from '../../pieces/FieldInput/FieldInput';
+import {
+  onDailyWorkItems,
+  addDailyWorkItem,
+  getDailyWorkItems,
+} from '../../../Firebase';
+import InputField from '../../pieces/InputField/InputField';
 
 export interface IDailyWorkitems {
   items: IWorkItem[];
 }
 
+const DailyWorkItems = (): JSX.Element => {
+  const [items, setItems] = useState<IWorkItem[]>();
 
-const DailyWorkItems: FC<IDailyWorkitems> = ({ items }: IDailyWorkitems): JSX.Element => {
-  const inputRef = useRef<HTMLInputElement>();
-  const [listItems, setListItems] = useState<JSX.Element[]>([]);
+  onDailyWorkItems((newItems: IWorkItem[]) => {
+    if (!items  || newItems.length !== items.length)
+      setItems(newItems);
+  });
 
+  const mapItems = () => {
+    if (items)
+      return items.map((item) => {
+        return <li>{item.item}</li>;
+      });
+    else return <></>;
+  };
 
-  const handleChange = (e: ChangeEvent) => {
-    console.log('e :>> ', e);
-  }
-
-
-  useEffect(() => {
-    const itemEls = items.map((item) => {
-      return <li>{item.content}</li>
-    });
-    setListItems(itemEls);
-  }, [])
+  const handleInput = (input: string) => {
+    console.log('e :>> ', input);
+    if (items) addDailyWorkItem(items.length, input);
+  };
   return (
-    <>
-      <StyledDailyWorkItems>{listItems}</StyledDailyWorkItems>
-      <FieldInput callback={handleChange} />
-    </>
-  )
+    <StyledDailyWorkItems>
+      <h2>Daily Work Items</h2>
+      <StyledDailyWorkItems>{mapItems()}</StyledDailyWorkItems>
+      <InputField callback={handleInput} />
+    </StyledDailyWorkItems>
+  );
 };
 export default DailyWorkItems;

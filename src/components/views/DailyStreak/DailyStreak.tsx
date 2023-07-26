@@ -35,7 +35,7 @@ const DailyStreak: FC<IDailyStreak> = (themeColors): JSX.Element => {
   });
 
   const handleStreakDotClick = (completed: boolean) => {
-    updateDailyChallenge({ completed });
+    updateDailyChallenge(completed);
     if (completed) updateDailyStreakCount(streakCount + 1);
     else updateDailyStreakCount(streakCount - 1);
   };

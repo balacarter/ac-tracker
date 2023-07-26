@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const StyledInputContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
 export const StyledInput = styled.input`
   &:focus-visible {
     outline: none;
