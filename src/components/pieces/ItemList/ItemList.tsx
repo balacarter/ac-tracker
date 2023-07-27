@@ -1,6 +1,10 @@
 import StreakDot from '../StreakDot/StreakDot';
 import { StyledThemeIcon } from '../StyledThemeIcon';
-import { StyledItemList, StyledListItemDotPair, StyledListItemPairContainer } from './styles';
+import {
+  StyledItemList,
+  StyledListItemDotPair,
+  StyledListItemPairContainer,
+} from './styles';
 
 interface IItem {
   id: number;
@@ -10,31 +14,31 @@ interface IItem {
 
 interface IItemList {
   items: IItem[];
-  updateItem: (completed: boolean, id: number) => void;
-  deleteItem: (id: number) => void;
+  updateItem?: (completed: boolean, id: number) => void;
+  deleteItem?: (id: number) => void;
 }
 
 const ItemList = ({ items, updateItem, deleteItem }: IItemList) => (
-    <StyledItemList>
-      {items.map((item: IItem) => (
-        <StyledListItemPairContainer key={item.id}>
-          <StyledListItemDotPair key={item.id}>
-            <StreakDot
-              checked={item.completed}
-              callback={updateItem}
-              active={true}
-              id={item.id}
-            />
-            <li>{item.item}</li>
-          </StyledListItemDotPair>
-          <StyledThemeIcon
-            $icon={'x'}
-            $right={0}
-            onClick={() => deleteItem(item.id)}
+  <StyledItemList>
+    {items.map((item: IItem) => (
+      <StyledListItemPairContainer key={item.id}>
+        <StyledListItemDotPair key={item.id}>
+          <StreakDot
+            checked={item.completed}
+            callback={updateItem}
+            active={true}
+            id={item.id}
           />
-        </StyledListItemPairContainer>
-      ))}
-    </StyledItemList>
+          <li>{item.item}</li>
+        </StyledListItemDotPair>
+        <StyledThemeIcon
+          $icon={'x'}
+          $right={0}
+          onClick={() => deleteItem && deleteItem(item.id)}
+        />
+      </StyledListItemPairContainer>
+    ))}
+  </StyledItemList>
 );
 
 export default ItemList;
