@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const StyledThemeIcon = styled.div<{
   $icon: string;
@@ -8,9 +8,19 @@ export const StyledThemeIcon = styled.div<{
   width: 1rem;
   height: 1rem;
   display: block;
-  ::before {
-    content: ${({$icon}) => `'${$icon}'`};;
+
+  :hover {
+    cursor: pointer;
   }
-  right: ${({$right}) => $right};
-  left: ${({$left}) => $left};
+
+  ::before {
+    content: ${({ $icon }) => `'${$icon}'`};
+  }
+  right: ${({ $right }) => $right};
+  left: ${({ $left }) => $left};
+
+  &.show {
+    font-size: 1.5rem;
+    height: auto;
+  }
 `;

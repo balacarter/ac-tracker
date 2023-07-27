@@ -20,7 +20,7 @@ const InputField = ({ callback }: IFieldInput) => {
       inputRef.current.value = '';
       setHideInput(!hideInput);
     }
-  }
+  };
 
   return (
     <StyledInputContainer>
@@ -31,7 +31,7 @@ const InputField = ({ callback }: IFieldInput) => {
         />
       {!hideInput && <StyledInput ref={inputRef} />}
     </StyledInputContainer>
-  )
-}
+  );
+};
 
 export default InputField;

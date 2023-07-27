@@ -1,4 +1,6 @@
-import React, { createContext, ReactNode, FC, useContext } from 'react';
+import React, {
+  createContext, ReactNode, FC, useContext,
+} from 'react';
 
 export interface IThemeColors {
   primary: string;
@@ -20,8 +22,6 @@ export const useThemeColorsContext = () => {
   return context;
 };
 
-const ThemeColorsProvider: FC<IThemeProviderProps> = ({ value, children }) => {
-  return <ThemeColorsContext.Provider value={{ ...value }}>{children}</ThemeColorsContext.Provider>;
-};
+const ThemeColorsProvider: FC<IThemeProviderProps> = ({ value, children }) => <ThemeColorsContext.Provider value={{ ...value }}>{children}</ThemeColorsContext.Provider>;
 
 export default ThemeColorsProvider;

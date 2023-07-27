@@ -14,8 +14,7 @@ interface IItemList {
   deleteItem: (id: number) => void;
 }
 
-const ItemList = ({ items, updateItem, deleteItem }: IItemList) => {
-  return (
+const ItemList = ({ items, updateItem, deleteItem }: IItemList) => (
     <StyledItemList>
       {items.map((item: IItem) => (
         <StyledListItemPairContainer key={item.id}>
@@ -36,7 +35,6 @@ const ItemList = ({ items, updateItem, deleteItem }: IItemList) => {
         </StyledListItemPairContainer>
       ))}
     </StyledItemList>
-  );
-};
+);
 
 export default ItemList;

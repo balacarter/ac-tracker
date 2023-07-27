@@ -7,7 +7,5 @@ export interface IWorkItem {
   completed: boolean;
 }
 
-const WorkItem: FC<IWorkItem> = ({ item }: IWorkItem): JSX.Element => {
-  return <StyledWorkItem>{item}</StyledWorkItem>;
-};
+const WorkItem: FC<IWorkItem> = ({ item }: IWorkItem): JSX.Element => <StyledWorkItem>{item}</StyledWorkItem>;
 export default WorkItem;

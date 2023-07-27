@@ -13,4 +13,4 @@ export const StyledCount = styled.span`
 
 export const StyledStreakMsg = styled.span`
   font-size: 1rem;
-`
+`;

@@ -17,8 +17,7 @@ export interface IChallengesProps {
 }
 
 const Challenges: FC<IChallengesProps> = ({ dailyChallenges }): JSX.Element => {
-  const [challenges, setChallenges] =
-    useState<IDailyChallenge[]>(dailyChallenges);
+  const [challenges, setChallenges] = useState<IDailyChallenge[]>(dailyChallenges);
 
   useEffect(() => {
     setChallenges(dailyChallenges);
@@ -42,15 +41,11 @@ const Challenges: FC<IChallengesProps> = ({ dailyChallenges }): JSX.Element => {
     dbRemove(`daily/challenges/${id}`);
   };
 
-  const mapChallenges = () => {
-    return challenges.map((challenge: IDailyChallenge) => {
-      return {
-        id: challenge.id,
-        item: challenge.challenge,
-        completed: challenge.completed,
-      };
-    });
-  };
+  const mapChallenges = () => challenges.map((challenge: IDailyChallenge) => ({
+    id: challenge.id,
+    item: challenge.challenge,
+    completed: challenge.completed,
+  }));
 
   return (
     <StyledChallengesContainer>

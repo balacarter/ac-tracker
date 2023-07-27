@@ -10,21 +10,18 @@ export const StyledStreakBox = styled.button<{
   border-radius: 25px;
   width: 1rem;
   height: 1rem;
-  ${({ $checked }) =>
-    $checked &&
-    css`
-      background-color: ${props => props.theme.secondary};
+  ${({ $checked }) => $checked
+    && css`
+      background-color: ${(props) => props.theme.secondary};
     `}
-  ${({ $active }) =>
-    $active &&
-    css`
+  ${({ $active }) => $active
+    && css`
       &:hover {
         cursor: pointer;
       }
     `}
-  ${({ $daily }) => 
-    $daily &&
-    css`
+  ${({ $daily }) => $daily
+    && css`
       margin: 0 0.35rem 0 0.35rem;
       width: 1.5rem;
       height: 1.5rem;

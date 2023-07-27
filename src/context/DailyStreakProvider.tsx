@@ -1,4 +1,6 @@
-import React, { createContext, ReactNode, FC, useContext } from 'react';
+import React, {
+  createContext, ReactNode, FC, useContext,
+} from 'react';
 
 export interface IDailyStreakContext {
   streakCount: string;
@@ -20,8 +22,6 @@ export const useDailyStreakContext = () => {
   return context;
 };
 
-const DailyStreakProvider: FC<DailyStreakProviderProps> = ({ value, children }) => {
-  return <DailyStreakContext.Provider value={{ ...value }}>{children}</DailyStreakContext.Provider>;
-};
+const DailyStreakProvider: FC<DailyStreakProviderProps> = ({ value, children }) => <DailyStreakContext.Provider value={{ ...value }}>{children}</DailyStreakContext.Provider>;
 
 export default DailyStreakProvider;
