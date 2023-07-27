@@ -1,9 +1,11 @@
 import styled from 'styled-components';
+import { StyledThemeIcon } from '../StyledThemeIcon';
 
 export const StyledInputContainer = styled.div`
   display: flex;
   flex-direction: row;
-`
+  gap: 0.5rem;
+`;
 
 export const StyledInput = styled.input`
   &:focus-visible {

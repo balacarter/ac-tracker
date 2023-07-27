@@ -31,8 +31,7 @@ const DailyStreak: FC<IDailyStreak> = (themeColors): JSX.Element => {
   dbSubscribe('daily/challenges', (newChallenges: IDailyChallenge[]) => {
     if (newChallenges && newChallenges?.length !== challenges.length) {
       setChallenges(newChallenges);
-    } else if (newChallenges === null && challenges.length > 0)
-      setChallenges([]);
+    } else if (newChallenges === null && challenges.length > 0) setChallenges([]);
   });
 
   const handleStreakDotClick = (completed: boolean) => {

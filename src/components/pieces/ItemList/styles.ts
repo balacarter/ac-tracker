@@ -22,7 +22,7 @@ export const StyledListItemPairContainer = styled.div`
   &:hover ${StyledThemeIcon} {
     display: block;
   }
-`
+`;
 
 export const StyledListItemDotPair = styled.div`
   display: flex;

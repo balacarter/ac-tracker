@@ -3,9 +3,9 @@ import { IThemeColors } from '../../context/ThemeColorsProvider';
 
 export const StyledDashboard = styled.div<{ $theme: IThemeColors }>`
   &,* {
-    border-color: ${({$theme}) => $theme.secondary};
-    color: ${({$theme}) => $theme.secondary};
-    background-color: ${({$theme}) => $theme.primary};
+    border-color: ${({ $theme }) => $theme.secondary};
+    color: ${({ $theme }) => $theme.secondary};
+    background-color: ${({ $theme }) => $theme.primary};
   }
   height: 100vh;
   display: flex;

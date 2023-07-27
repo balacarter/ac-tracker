@@ -5,8 +5,7 @@ export interface IDailyStreakCount {
   count: number;
 }
 
-const DailyStreakCount: FC<IDailyStreakCount> = ({count}:IDailyStreakCount):JSX.Element => {
-  return (
+const DailyStreakCount: FC<IDailyStreakCount> = ({ count }:IDailyStreakCount):JSX.Element => (
     <StyledDailyStreak>
       <StyledCount>
         {count}
@@ -15,6 +14,5 @@ const DailyStreakCount: FC<IDailyStreakCount> = ({count}:IDailyStreakCount):JSX.
         day streak
       </StyledStreakMsg>
     </StyledDailyStreak>
-  )
-}
+);
 export default DailyStreakCount;

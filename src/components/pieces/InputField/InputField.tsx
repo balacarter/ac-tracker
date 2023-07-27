@@ -20,18 +20,20 @@ const InputField = ({ callback }: IFieldInput) => {
       inputRef.current.value = '';
       setHideInput(!hideInput);
     }
-  }
+  };
 
   return (
     <StyledInputContainer>
       <StyledThemeIcon
-          $icon={hideInput ? '+' : '✓'}
-          className={hideInput ? 'show' : 'add'}
-          onClick={handleInput}
-        />
+        $icon={hideInput ? '+' : '☑︎'}
+        $fontSize="1.5rem"
+        $height="auto"
+        className={hideInput ? 'show' : 'add'}
+        onClick={handleInput}
+      />
       {!hideInput && <StyledInput ref={inputRef} />}
     </StyledInputContainer>
-  )
-}
+  );
+};
 
 export default InputField;

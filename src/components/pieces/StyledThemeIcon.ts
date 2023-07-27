@@ -4,13 +4,31 @@ export const StyledThemeIcon = styled.div<{
   $icon: string;
   $right?: number;
   $left?: number;
+  $fontSize?: string;
+  $height?: string;
 }>`
   width: 1rem;
   height: 1rem;
   display: block;
-  ::before {
-    content: ${({$icon}) => `'${$icon}'`};;
+
+  ${({ $fontSize }) =>
+    $fontSize &&
+    css`
+      font-size: ${$fontSize};
+    `}
+  ${({ $height }) =>
+    $height &&
+    css`
+      height: ${$height};
+    `}
+
+  :hover {
+    cursor: pointer;
   }
-  right: ${({$right}) => $right};
-  left: ${({$left}) => $left};
+
+  ::before {
+    content: ${({ $icon }) => `'${$icon}'`};
+  }
+  right: ${({ $right }) => $right};
+  left: ${({ $left }) => $left};
 `;

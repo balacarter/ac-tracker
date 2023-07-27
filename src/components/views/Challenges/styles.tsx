@@ -29,7 +29,7 @@ export const StyledChallengePairContainer = styled.div`
   &:hover ${StyledThemeIcon} {
     display: block;
   }
-`
+`;
 
 export const StyledChallengeDotPair = styled.div`
   display: flex;
@@ -52,13 +52,7 @@ export const StyledAddChallengeContainer = styled.div`
   ${StyledIcon} {
     margin-top: 0.5rem;
   }
-
-  .show {
-    font-size: 1.5rem;
-    height: auto;
-  }
 `;
-
 
 export const StyledAddChallengeInput = styled.input`
   &:focus-visible {
@@ -69,4 +63,3 @@ export const StyledAddChallengeInput = styled.input`
   border-bottom: 1px solid;
   padding-bottom: 0;
 `;
-

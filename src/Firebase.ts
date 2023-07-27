@@ -1,7 +1,9 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from 'firebase/app';
-import { getDatabase, set, ref, get, child, onValue, remove } from 'firebase/database';
+import {
+  getDatabase, set, ref, get, child, onValue, remove,
+} from 'firebase/database';
 
 export interface IDailyChallenge {
   id: number;
@@ -33,30 +35,28 @@ const firebaseConfig = {
 
 export const dbUpdate = (dbPath: string, data: any) => {
   set(ref(database, dbPath), data);
-}
+};
 
 export const dbAdd = (dbPath: string, data: any) => {
   set(ref(database, dbPath), data);
-}
+};
 
 export const dbSubscribe = (dbPath: string, callback: any) => {
   const dbRef = ref(database, dbPath);
   onValue(dbRef, (snapshot) => {
     const data = snapshot.val();
     callback(data);
-  })
-}
+  });
+};
 
 export const dbGet = (dbPath: string) => {
   const dbRef = ref(getDatabase());
-  return (get(child(dbRef, dbPath)).then((snapshot) => {
-    return snapshot.val();
-  }));
-}
+  return (get(child(dbRef, dbPath)).then((snapshot) => snapshot.val()));
+};
 
 export const dbRemove = (dbPath: string) => {
   remove(ref(database, dbPath));
-}
+};
 
 // Initialize Firebase
 

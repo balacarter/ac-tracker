@@ -7,7 +7,7 @@ export const StyledDailyStreakContainer = styled.div`
   padding: 1rem;;
   border-style: solid;
   border-width: 1px;
-`
+`;
 
 export const StyledDailyStreak = styled.div`
   display: flex;
@@ -18,7 +18,7 @@ export const StyledDailyStreak = styled.div`
   border-style: solid;
   border-width: 1px;
   height: fit-content;
-`
+`;
 export const StyledStreakDotContainer = styled.div<{ $checked: boolean }>`
   display: flex;
   flex-direction: row;
@@ -27,9 +27,9 @@ export const StyledStreakDotContainer = styled.div<{ $checked: boolean }>`
   column-gap: 0.3rem;
   padding-top: 1rem;
   padding-bottom: 0.25rem;
-`
+`;
 
 export const StyledTodaySpan = styled.div`
   font-size: 10px;
   font-weight: 500;
-`
+`;
