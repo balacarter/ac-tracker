@@ -1,14 +1,12 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from 'firebase/app';
-import { getDatabase, set, ref, get, child, onValue } from 'firebase/database';
+import { getDatabase, set, ref, get, child, onValue, remove } from 'firebase/database';
 
-export interface IDailyCompletedPayload {
+export interface IDailyChallenge {
+  id: number;
+  challenge: string;
   completed: boolean;
-}
-
-export interface IDailyStreakCountPaylod {
-  count: number;
 }
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -33,32 +31,32 @@ const firebaseConfig = {
   appId: '1:136966603171:web:e98f1b9e01bb9fdc1e5a16',
 };
 
-export const updateDailyChallenge = (completed: IDailyCompletedPayload) => {
-  set(ref(database, 'daily/completed'), {
-    completed,
-  });
-};
+export const dbUpdate = (dbPath: string, data: any) => {
+  set(ref(database, dbPath), data);
+}
 
-export const getDailyStreakCount = () => {
-  const dbRef = ref(getDatabase());
-  return (get(child(dbRef, 'daily/count')).then((snapshot) => {
-    return snapshot.val();
-  }));
-};
+export const dbAdd = (dbPath: string, data: any) => {
+  set(ref(database, dbPath), data);
+}
 
-export const onDailyStreakCount = (callback: any) => {
-  const dbRef = ref(database, 'daily/count');
+export const dbSubscribe = (dbPath: string, callback: any) => {
+  const dbRef = ref(database, dbPath);
   onValue(dbRef, (snapshot) => {
-    const data = snapshot.val().count;
+    const data = snapshot.val();
     callback(data);
   })
 }
 
-export const updateDailyStreakCount = (count: number) => {
-  set(ref(database, 'daily/count'), {
-    count,
-  });
-};
+export const dbGet = (dbPath: string) => {
+  const dbRef = ref(getDatabase());
+  return (get(child(dbRef, dbPath)).then((snapshot) => {
+    return snapshot.val();
+  }));
+}
+
+export const dbRemove = (dbPath: string) => {
+  remove(ref(database, dbPath));
+}
 
 // Initialize Firebase
 

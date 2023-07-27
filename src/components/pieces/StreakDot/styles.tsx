@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
-import { themeColors } from '../../../containers/Dashboard/Dashboard';
 
 export const StyledStreakBox = styled.button<{
   $active: boolean;
   $checked: boolean;
+  $daily: boolean
 }>`
   border-width: 2px;
   border-style: solid;
@@ -13,7 +13,7 @@ export const StyledStreakBox = styled.button<{
   ${({ $checked }) =>
     $checked &&
     css`
-      background-color: ${themeColors[1]};
+      background-color: ${props => props.theme.secondary};
     `}
   ${({ $active }) =>
     $active &&
@@ -21,10 +21,15 @@ export const StyledStreakBox = styled.button<{
       &:hover {
         cursor: pointer;
       }
+    `}
+  ${({ $daily }) => 
+    $daily &&
+    css`
       margin: 0 0.35rem 0 0.35rem;
       width: 1.5rem;
       height: 1.5rem;
     `}
+
 `;
 
 export const StreakDotContainer = styled.div`

@@ -6,6 +6,6 @@ export interface IBlankDot {
 }
 
 const BlankDot: FC<IBlankDot> = ({ checked }: IBlankDot): JSX.Element => {
-  return <StyledStreakBox $active={false} $checked={checked}></StyledStreakBox>;
+  return <StyledStreakBox $active={false} $checked={checked} $daily={false}></StyledStreakBox>;
 };
 export default BlankDot;
